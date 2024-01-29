@@ -1,0 +1,7 @@
+<ion-content [fullscreen]="true">
+    @if(coords) {
+      <bm-map [coords]="coords">
+        <bm-marker [coords]="coords" color="blue"></bm-marker>
+      </bm-map>
+    }
+</ion-content>
