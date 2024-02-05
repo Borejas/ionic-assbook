@@ -22,4 +22,11 @@ export const postsRoutes: Routes = [
     loadChildren: () => // Child (inner) routes
       import('./posts-detail/posts-detail.routes').then((m) => m.postsDetailRoutes),
   },
+  {
+    path: ':id/edit',
+    loadComponent: () =>
+      import('./posts-form/posts-form.page').then(
+        (m) => m.PostsFormPage
+      ),
+  }
 ];

@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { Coordinates } from './coordinates';
 import { BINGMAPS_KEY } from './bingmaps.config';
+import { Coordinates } from './interfaces/coordinates';
 
 interface AutoSuggestOptions extends Microsoft.Maps.IAutosuggestOptions {
   businessSuggestions: boolean;

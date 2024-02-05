@@ -20,4 +20,10 @@ export const routes: Routes = [
       import('./posts/posts.routes').then((m) => m.postsRoutes),
     canActivate: [loginActivateGuard]
   },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./profile/profile.routes').then( m => m.profileRoutes)
+  },
+
 ];

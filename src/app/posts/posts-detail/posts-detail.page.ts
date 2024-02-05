@@ -16,7 +16,7 @@ import { Component, Input, inject, signal } from '@angular/core';
 
     #PostService = inject(PostService);
 
-    constructor() { }
+    constructor() {}
 
     ionViewWillEnter() {
       this.#PostService.getPost(this.id).subscribe(

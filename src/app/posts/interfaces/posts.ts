@@ -6,8 +6,9 @@ export interface PostInsert {
     description?: string;
     mood: number;
     image?: string;
+    place?: string;
     date?: string;
-    likes: boolean | null;
+    likes?: boolean | null;
     lat?: number ;
     lng?: number ;
   }

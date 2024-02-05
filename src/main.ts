@@ -9,6 +9,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authTokenInterceptor } from './app/interceptors/auth-token.interceptor';
 import { baseUrlInterceptor } from './app/interceptors/base-url.interceptor';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
+import { provideBingmapsKey } from './app/bingmaps/bingmaps.config';
 
 defineCustomElements(window);
 
@@ -24,6 +25,8 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(withInterceptors([baseUrlInterceptor, authTokenInterceptor])),
     provideRouter(routes, withPreloading(PreloadAllModules), withComponentInputBinding()),
     provideRouter(routes, withRouterConfig({paramsInheritanceStrategy: 'always'})),
+    provideBingmapsKey('AktyCrJO2dGAQxrb0_jy65cq18tWeRp66MAMNWwLrCoPIm9_HD9moXNXknchzwhJ'),
+
 
   ],
 });

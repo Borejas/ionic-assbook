@@ -8,82 +8,47 @@ import { RouterLink } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { Post } from '../interfaces/posts';
 import { CommonModule } from '@angular/common';
-import { thumbsUp,thumbsDown } from 'ionicons/icons';
+import { thumbsUp,thumbsDown, create } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { PostFilterPipe } from '../pipes/post-filter.pipe';
+import { FormsModule } from '@angular/forms';
+import { PostItemPage } from "../post-item/post-item.page";
+
 
 @Component({
-  selector: 'home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
-  standalone: true,
-  imports: [IonSearchbar, IonAvatar, CurrencyPipe, RouterLink, IonRouterLink, IonHeader, IonToolbar, IonButtons, IonMenuButton,
-     IonTitle, IonContent, IonRefresher, IonRefresherContent, IonFab, IonFabButton, IonIcon,
-      IonList, IonItem, IonThumbnail,IonLabel, IonButton,IonCard,IonImg,IonCardTitle,IonCardHeader,IonCardSubtitle,IonCol, CommonModule]
+    selector: 'home',
+    templateUrl: './home.page.html',
+    styleUrls: ['./home.page.scss'],
+    standalone: true,
+    imports: [IonSearchbar, IonAvatar, CurrencyPipe, RouterLink, IonRouterLink, IonHeader, IonToolbar, IonButtons, IonMenuButton,
+        IonTitle, IonContent, IonRefresher, IonRefresherContent, IonFab, IonFabButton, IonIcon,
+        IonList, IonItem, IonThumbnail, IonLabel, IonButton, IonCard, IonImg, IonCardTitle, IonCardHeader, IonCardSubtitle, IonCol, CommonModule,
+        PostFilterPipe, FormsModule, PostItemPage]
 })
 
-export class HomePage {
+export class HomePage  {
 
   constructor() {
-    addIcons({ thumbsUp,thumbsDown});
+    addIcons({ thumbsUp,thumbsDown,create});
   }
   
-  post: Post[] = [];
-  searchPost = '';
-
-  #PostService = inject(PostService);
-  #navController = inject(NavController);
-  #actionSheetCtrl =inject(ActionSheetController);
-
+  posts: Post[] = [];
+  searchPost:string = '';
+  #PostService = inject(PostService); 
+ 
   ionViewWillEnter() {
     this.#PostService
       .getPosts()
-      .subscribe((posts) => (this.post = posts));
+      .subscribe((posts) => (this.posts = posts));
   }
 
   reloadPosts(refresher: IonRefresher) {
     this.#PostService
     .getPosts()
     .subscribe((posts) => {
-      this.post = posts;
+      this.posts = posts;
       refresher.complete();
     });
   }
-
-  async showOptions(post: Post) {
-    const actSheet = await this.#actionSheetCtrl.create({
-      header: post.description,
-      buttons: [
-        {
-          text: 'Delete',
-          role: 'destructive',
-          icon: 'trash',
-          handler: () => {
-            this.#PostService
-              .deletePost(post.id!)
-              .subscribe(() =>
-                this.post.splice(this.post.indexOf(post), 1)
-              );
-          },
-        },
-        {
-          text: 'See details',
-          icon: 'eye',
-          handler: () => {
-            this.#navController.navigateForward(['/posts', post.id]);
-          },
-        },
-        {
-          text: 'Cancel',
-          icon: 'close',
-          role: 'cancel',
-        },
-      ],
-    });
-
-    actSheet.present();
-  }
-
- 
-
 
 }

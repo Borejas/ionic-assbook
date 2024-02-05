@@ -4,7 +4,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Platform, IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote,
    IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet, IonAvatar, IonImg, IonRouterLink } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { home, logIn, documentText, checkmarkCircle, images, camera, arrowUndoCircle } from 'ionicons/icons';
+import { home, logIn, documentText, checkmarkCircle, images, camera, arrowUndoCircle, informationCircle, chatboxEllipses, navigate } from 'ionicons/icons';
 import { AuthService } from './auth/services/auth.service';
 import { User } from './auth/interfaces/user';
 import { SplashScreen } from '@capacitor/splash-screen';
@@ -39,10 +39,12 @@ export class AppComponent {
   public appPages = [
     { title: 'Home', url: '/posts', icon: 'home' },
     { title: 'Add posts', url: '/posts/add', icon: 'add' },
+    { title: 'Profile', url: '/profile/me', icon: 'eye' },
+
   ];
   
   constructor() {
-    addIcons({ home, logIn, documentText, checkmarkCircle, images, camera, arrowUndoCircle,add,close,menu,trash,eye,exit,heart});
+    addIcons({ home, logIn, documentText, checkmarkCircle, images, camera, arrowUndoCircle,add,close,menu,trash,eye,exit,heart,informationCircle,chatboxEllipses,navigate});
 
     effect(() => {
       if (this.#authService.logged()) {

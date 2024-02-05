@@ -1,0 +1,67 @@
+@if (user) {
+<ion-content>
+  <ion-row class="ion-align-items-center ion-justify-content-center mt-4">
+    <ion-col size="3">
+      <ion-img
+        class="w-100"
+        id="avatar"
+        [src]="user.user.avatar"
+        alt=""
+      ></ion-img>
+      <input type="file" #fileInput style="display: none" (change)="onAvatarChange($event)" />
+      <ion-button (click)="fileInput.click()" [ngClass]="{
+        'd-none': !profile,
+        '': profile
+      }">Change Foto</ion-button>
+    </ion-col>
+    
+
+    <ion-col size="9" id="profileInfo">
+      <ion-label>
+        <h1 id="name">{{ user.user.name }}</h1>
+        <h1 id="email">
+          <small class="text-muted">{{ user.user.email }}</small>
+        </h1>
+      </ion-label>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="mt-4">
+    <ion-col size="12" id="map">
+      <ion-item>
+        <bm-map [coords]="cords" name="mapa" #search>
+          <bm-marker [coords]="cords" color="blue"></bm-marker>
+          <bm-autosuggest
+            idContainer="parentSearch"
+            idInput="search"
+            (locationChanged)="moveMap($event)"
+          ></bm-autosuggest>
+        </bm-map>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <div class="fab-container" [ngClass]="{
+    'd-none': !profile,
+    '': profile
+  }">
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="secondary" (click)="passwordChange()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button color="danger" (click)="ProfileChange()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab> 
+
+    <ion-button class="btn btn-info" role="button" [routerLink]="['/posts']"
+     [queryParams]="{ creator: user.user.id}">{{'Posts of ' + user.user.name}}
+    </ion-button>
+
+  </div>
+</ion-content>
+}

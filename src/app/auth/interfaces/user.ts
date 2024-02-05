@@ -4,8 +4,8 @@ export interface User {
     email: string;
     password?: string;
     avatar: string;
-    latitude: number;
-    longitude: number;
+    lat: number;
+    lng: number;
   }
 
   export interface UserLogin {

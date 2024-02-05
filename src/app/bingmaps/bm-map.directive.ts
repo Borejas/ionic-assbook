@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input, OnInit, WritableSignal, inject, signal } from '@angular/core';
-import { Coordinates } from './coordinates';
 import { LoadBingmapsService } from './load-bingmaps.service';
+import { Coordinates } from './interfaces/coordinates';
 
 @Directive({ selector: 'bm-map', standalone: true })
 

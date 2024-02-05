@@ -23,8 +23,8 @@ export class LoginPage implements OnInit {
     password: '',
     email: '',
     avatar: '',
-    latitude: 0,
-    longitude: 0
+    lat: 0,
+    lng: 0
   };
 
   email = '';
@@ -58,10 +58,10 @@ export class LoginPage implements OnInit {
   getLocation() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.user.latitude = position.coords.latitude;
-        this.user.longitude = position.coords.longitude;
-        console.log('Latitude', this.user.latitude);
-        console.log('Longitude', this.user.longitude);
+        this.user.lat = position.coords.latitude;
+        this.user.lng = position.coords.longitude;
+        console.log('Latitude', this.user.lat);
+        console.log('Longitude', this.user.lng);
       });
     }else {
       console.log('Geolocation is not available');

@@ -16,6 +16,13 @@ export const postsDetailRoutes: Routes = [
       ),
   },
   {
+    path: 'maps',
+    loadComponent: () =>
+      import('./posts-location/posts-location.page').then(
+        (m) => m.PostLocationPage
+      ),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'info', // Por defecto

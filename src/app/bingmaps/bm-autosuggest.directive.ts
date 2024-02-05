@@ -1,7 +1,7 @@
 import { Directive, EventEmitter, Injector, Input, OnInit, Output, effect, inject } from '@angular/core';
 import { BmMapDirective } from './bm-map.directive';
 import { LoadBingmapsService } from './load-bingmaps.service';
-import { Coordinates } from './coordinates';
+import { Coordinates } from './interfaces/coordinates';
 
 @Directive({ selector: 'bm-autosuggest', standalone: true })
 

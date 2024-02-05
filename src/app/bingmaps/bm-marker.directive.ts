@@ -1,7 +1,7 @@
 import { Directive, Input, effect, inject } from '@angular/core';
 import { BmMapDirective } from './bm-map.directive';
 import { LoadBingmapsService } from './load-bingmaps.service';
-import { Coordinates } from './coordinates';
+import { Coordinates } from './interfaces/coordinates';
 @Directive({ selector: 'bm-marker', standalone: true })
 
 export class BmMarkerDirective {

@@ -1,7 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { IonRouterLink, ToastController, NavController, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonInput, IonIcon, IonImg, IonButton, IonGrid, IonRow, IonCol, IonLabel } from '@ionic/angular/standalone';
+import { IonRouterLink, ToastController, NavController, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonInput,
+   IonIcon, IonImg, IonButton, IonGrid, IonRow, IonCol, IonLabel } from '@ionic/angular/standalone';
 import { User } from '../interfaces/user';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AuthService } from '../services/auth.service';
@@ -12,26 +13,29 @@ import { ValueEqualsDirective } from 'src/app/validators/value-equals.directive'
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [ FormsModule, RouterLink, IonRouterLink, ValueEqualsDirective, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonInput, IonIcon, IonImg, IonButton, IonGrid, IonRow, IonCol, IonLabel],
+  imports: [ FormsModule, RouterLink, IonRouterLink, ValueEqualsDirective, IonHeader, IonToolbar, IonTitle, IonContent, IonList,
+     IonItem, IonInput, IonIcon, IonImg, IonButton, IonGrid, IonRow, IonCol, IonLabel],
 })
 export class RegisterPage implements OnInit{
+  async ngOnInit() {
+    await this.getLocation();
+    // console.log('Latitude', this.user.latitude);
+    // console.log('Longitude', this.user.longitude);
+  }
+
   user: User = {
     name: '',
     password: '',
     email: '',
     avatar: '',
-    latitude: 0,
-    longitude: 0
+    lat: 0,
+    lng: 0
   };
   password2 = '';
 
   #authService = inject(AuthService);
   #toastCtrl = inject(ToastController);
-  #nav = inject(NavController);
-
-  ngOnInit() {
-    this.getLocation();
-  }
+  #nav = inject(NavController); 
 
   register() {
     this.#authService.register(this.user).subscribe(
@@ -46,17 +50,13 @@ export class RegisterPage implements OnInit{
     );
   }
 
-  getLocation() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.user.latitude = position.coords.latitude;
-        this.user.longitude = position.coords.longitude;
-        console.log('Latitude', this.user.latitude);
-        console.log('Longitude', this.user.longitude);
-      });
-    }else {
-      console.log('Geolocation is not available');
-    }
+  async getLocation() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.user.lat = position.coords.latitude;
+      this.user.lng = position.coords.longitude;
+      console.log('Latitude', this.user.lat);
+      console.log('Longitude', this.user.lng);
+    });
   }
 
   async takePhoto() {;
@@ -68,7 +68,6 @@ export class RegisterPage implements OnInit{
       allowEditing: true,
       resultType: CameraResultType.DataUrl // Base64 (url encoded)
     });
-
     this.user.avatar = photo.dataUrl as string;
   }
 
@@ -80,7 +79,6 @@ export class RegisterPage implements OnInit{
       allowEditing: true,
       resultType: CameraResultType.DataUrl // Base64 (url encoded)
     });
-
     this.user.avatar = photo.dataUrl as string;
   }
 }
