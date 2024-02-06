@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject, numberAttribute } from '@angular/core';
 import { NavController, ActionSheetController, IonRouterLink, IonHeader, IonToolbar, 
   IonButtons, IonMenuButton, IonTitle, IonContent, IonRefresher, IonRefresherContent, IonFab,
    IonFabButton, IonIcon, IonList, IonItem, 
@@ -13,7 +13,8 @@ import { addIcons } from 'ionicons';
 import { PostFilterPipe } from '../pipes/post-filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { PostItemPage } from "../post-item/post-item.page";
-
+import { User } from '../../auth/interfaces/user';
+import { ServicesProfileService } from 'src/app/profile/services/services-profile.service';
 
 @Component({
     selector: 'home',
@@ -34,7 +35,41 @@ export class HomePage  {
   
   posts: Post[] = [];
   searchPost:string = '';
-  #PostService = inject(PostService); 
+  #PostService = inject(PostService);
+  user!: User | null;
+  id!: number;
+  #profileService = inject(ServicesProfileService);
+
+  @Input({ transform: numberAttribute }) set creator(creator: number) {
+    console.log(creator);
+    if (creator ) {
+      this.id = creator;
+
+      this.#profileService.getProfile(this.id).subscribe({
+        next: (user) => {
+          this.user = user.user;
+        },
+        error: (error) => console.error(error),
+      });
+
+      this.#PostService.getUserPosts(this.id).subscribe({
+        next: (posts) => {
+          this.posts = posts;
+        },
+        error: (error) => console.error(error),
+      });
+
+    } else {
+      this.user=null;
+      this.#PostService.getPosts().subscribe({
+        next: (posts) => {
+          this.posts = posts;
+        },
+        error: (error) => console.error(error),
+      });
+    }
+  }
+
  
   ionViewWillEnter() {
     this.#PostService

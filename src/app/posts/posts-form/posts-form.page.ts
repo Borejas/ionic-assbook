@@ -38,7 +38,10 @@ export class PostsFormPage implements OnInit{
     description: '',
     mood: 0,
     image: '',
-    likes: null,    
+    likes: null,
+    place: '',
+    lat: 0,
+    lng: 0   
   };
  
   ngOnInit(): void {
@@ -61,7 +64,7 @@ export class PostsFormPage implements OnInit{
   }
   
   addPosts() {
-
+    
     let Post: PostInsert;
 
     if (this.selectedMediaType === 'photo') {     
@@ -73,7 +76,6 @@ export class PostsFormPage implements OnInit{
         image: this.newPost.image,
       };
 
-
     }else {
      
       Post = {
@@ -81,8 +83,8 @@ export class PostsFormPage implements OnInit{
         description: this.newPost.description,
         mood: this.newPost.mood,
         place: this.newPost.place,
-        lat: this.newPost.lat,
-        lng: this.newPost.lng,
+        lat: this.cords.latitude,
+        lng: this.cords.longitude
       };
     }
 

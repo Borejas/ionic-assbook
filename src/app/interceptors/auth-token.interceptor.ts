@@ -6,7 +6,6 @@ export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
   // from converts a Promise into an observable
   return from(Preferences.get({ key: 'fs-token' })).pipe(
     switchMap((token) => { // switchMap is necessary if it returns another observable or a promise
-      console.log(token);
       if (!token.value) {
         return next(req);
       }

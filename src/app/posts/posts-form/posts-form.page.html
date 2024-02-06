@@ -64,7 +64,7 @@
          <ion-input #search name="search"  label="Location" labelPlacement="floating" ></ion-input>
         </ion-item> 
         <div id="parentSearch"></div>     
-        <ion-item  >
+        <ion-item>
           <bm-map [coords]="cords" name="mapa" #search>
             <bm-marker [coords]="cords" color="blue"></bm-marker>
             @if(autoSuggest) {
@@ -84,7 +84,7 @@
         <ion-col>
           <ion-button type="submit" color="primary" expand="block" [disabled]="postsForm.invalid || (selectedMediaType === 'photo' && !newPost.image)">
             <ion-icon name="add" slot="start"></ion-icon>
-            Add product
+            Add posts
           </ion-button>
         </ion-col>
         <ion-col>

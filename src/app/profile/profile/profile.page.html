@@ -56,12 +56,13 @@
       <ion-fab-button color="danger" (click)="ProfileChange()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
-    </ion-fab> 
-
-    <ion-button class="btn btn-info" role="button" [routerLink]="['/posts']"
-     [queryParams]="{ creator: user.user.id}">{{'Posts of ' + user.user.name}}
-    </ion-button>
+    </ion-fab>    
 
   </div>
+
+  <ion-button class="btn btn-info" role="button" [routerLink]="['/posts']"
+     [queryParams]="{ creator: user.user.id}">{{'Posts of ' + user.user.name}}
+  </ion-button>
+  
 </ion-content>
 }

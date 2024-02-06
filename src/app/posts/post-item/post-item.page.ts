@@ -5,7 +5,7 @@ import { ActionSheetController, IonicModule, NavController } from '@ionic/angula
 import { PostService } from '../services/posts.service';
 import { Post } from '../interfaces/posts';
 import { RouterLink } from '@angular/router';
-import { IonAvatar, IonButton, IonButtons, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonIcon, IonImg, IonLabel } from '@ionic/angular/standalone';
+import { IonAvatar, IonButton, IonButtons, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonIcon, IonImg, IonLabel, ToastController } from '@ionic/angular/standalone';
 
 
 @Component({
@@ -25,6 +25,8 @@ export class PostItemPage  implements OnInit {
   #PostService = inject(PostService);
   #navController = inject(NavController);
   #actionSheetCtrl =inject(ActionSheetController);
+  #toastCtrl = inject(ToastController);
+
 
   ngOnInit(): void {
     this.#PostService.getPost(this.post.id!).subscribe({
@@ -76,9 +78,14 @@ export class PostItemPage  implements OnInit {
   }
 
   delete() {
-    this.#PostService.deletePost(this.post.id!).subscribe(() => {
-      this.#navController.navigateRoot('/posts');
-      window.location.reload();
+    this.#PostService.deletePost(this.post.id!).subscribe({
+      next: async () => {
+       (await this.#toastCtrl.create({
+          message: 'Post deleted successfully',
+          duration: 2000,
+        })).present();
+        this.#navController.navigateBack('/posts');        
+      }
     });
   }
 

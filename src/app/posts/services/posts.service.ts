@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Post,PostInsert } from '../interfaces/posts';
 import { Comment } from '../interfaces/comment';
-import { LikeResponse, SinglePostResponse } from '../interfaces/responses';
+import { LikeResponse, PostsResponse, SinglePostResponse } from '../interfaces/responses';
 
 @Injectable({
   providedIn: 'root',
@@ -62,6 +62,10 @@ export class PostService {
   // deleteVote(id:number)
   deleteVote(id: number): Observable<number> {
     return this.#http.delete<LikeResponse>(`posts/${id}/likes`).pipe(map((resp) => resp.totalLikes));
+  }
+
+  getUserPosts(id:number): Observable<Post[]> {
+    return this.#http.get<PostsResponse>(`posts/user/${id}`).pipe(map((resp) => resp.posts));
   }
   
   

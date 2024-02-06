@@ -54,8 +54,6 @@ export class RegisterPage implements OnInit{
     navigator.geolocation.getCurrentPosition((position) => {
       this.user.lat = position.coords.latitude;
       this.user.lng = position.coords.longitude;
-      console.log('Latitude', this.user.lat);
-      console.log('Longitude', this.user.lng);
     });
   }
 
