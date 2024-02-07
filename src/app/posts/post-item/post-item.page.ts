@@ -16,7 +16,7 @@ import { IonAvatar, IonButton, IonButtons, IonCard, IonCardHeader, IonCardSubtit
   imports: [ CommonModule, FormsModule,RouterLink,IonCard, IonImg, IonCardTitle, IonCardHeader, IonCardSubtitle, IonCol, CommonModule,
      FormsModule, PostItemPage,IonAvatar,IonButtons,IonIcon,IonLabel,IonButton]
 })
-export class PostItemPage  implements OnInit {
+export class PostItemPage  implements OnInit  {
  
   @Input() post!: Post;
   @Input() id!: number;
@@ -26,15 +26,10 @@ export class PostItemPage  implements OnInit {
   #navController = inject(NavController);
   #actionSheetCtrl =inject(ActionSheetController);
   #toastCtrl = inject(ToastController);
+  
 
-
-  ngOnInit(): void {
-    this.#PostService.getPost(this.post.id!).subscribe({
-      next: (resp) => {
-        this.numLikes = resp.totalLikes;
-      },
-      error: (error) => console.error(error),
-    });
+  ngOnInit(){
+    this.numLikes = this.post.totalLikes;
   }
 
   thumbsUp(post: Post) {

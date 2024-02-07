@@ -4,9 +4,7 @@ import { AlertController, NavController, IonRouterLink, IonHeader, IonToolbar, I
 import { AuthService } from '../services/auth.service';
 import { RouterLink } from '@angular/router';
 import { User } from '../interfaces/user';
-// import { User } from '../interfaces/user';
-// import { GoogleAuth, User } from '@codetrix-studio/capacitor-google-auth';
-
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 
 @Component({
@@ -18,6 +16,7 @@ import { User } from '../interfaces/user';
     IonContent, IonList, IonItem, IonLabel, IonInput, IonGrid, IonRow, IonCol, IonButton, IonIcon]
 })
 export class LoginPage implements OnInit {
+  
   user: User = {
     name: '',
     password: '',
@@ -66,11 +65,5 @@ export class LoginPage implements OnInit {
     }
   }
 
-  // async loginGoogle() {
-  //   try {
-  //     this.user = await GoogleAuth.signIn();
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
+
 }

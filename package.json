@@ -30,6 +30,7 @@
     "@capacitor/preferences": "^5.0.6",
     "@capacitor/splash-screen": "^5.0.6",
     "@capacitor/status-bar": "^5.0.6",
+    "@codetrix-studio/capacitor-google-auth": "^3.3.6",
     "@ionic/angular": "^7.5.0",
     "@ionic/pwa-elements": "^3.2.2",
     "@proteansoftware/capacitor-start-navigation": "^5.0.0",

@@ -40,6 +40,8 @@ export class AuthService {
       );
   }
 
+  
+
   register(user: User): Observable<void> {
     return this.#http.post<void>('auth/register', user);
   }

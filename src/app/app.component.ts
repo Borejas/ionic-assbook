@@ -18,6 +18,8 @@ import { exit } from 'ionicons/icons';
 import { heart } from 'ionicons/icons';
 // import { hear-half} from 'ionicons/icons';
 import { NavController} from '@ionic/angular/standalone';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+
 
 
 @Component({
@@ -63,6 +65,7 @@ export class AppComponent {
       SplashScreen.hide();
       StatusBar.setBackgroundColor({ color: '#3880ff' });
       StatusBar.setStyle({ style: Style.Dark });
+      GoogleAuth.initialize();
     }
   }
 

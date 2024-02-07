@@ -70,13 +70,6 @@ export class HomePage  {
     }
   }
 
- 
-  ionViewWillEnter() {
-    this.#PostService
-      .getPosts()
-      .subscribe((posts) => (this.posts = posts));
-  }
-
   reloadPosts(refresher: IonRefresher) {
     this.#PostService
     .getPosts()
