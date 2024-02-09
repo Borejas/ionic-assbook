@@ -4,7 +4,6 @@ import { AlertController, NavController, IonRouterLink, IonHeader, IonToolbar, I
 import { AuthService } from '../services/auth.service';
 import { RouterLink } from '@angular/router';
 import { User } from '../interfaces/user';
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 
 @Component({

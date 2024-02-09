@@ -26,7 +26,7 @@
 
       <ion-item class="mb-3">
         <ion-label position="stacked" for="mood">Mood</ion-label>
-        <ion-select [(ngModel)]="newPost.mood" #moodModel="ngModel" name="select" (ionChange)="ChangeMood($event)">
+        <ion-select [(ngModel)]="newPost.mood" #moodModel="ngModel" name="select" placeholder="Mood" (ionChange)="ChangeMood($event)">
           <ion-select-option value="0">Neutral</ion-select-option>
           <ion-select-option value="1">Happy</ion-select-option>
           <ion-select-option value="2">Angry</ion-select-option>

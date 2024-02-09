@@ -187,5 +187,4 @@ export class PostsFormPage implements OnInit{
     });
     this.newPost.image = photo.dataUrl as string;
   }
-
 }
